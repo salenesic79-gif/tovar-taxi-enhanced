@@ -7,7 +7,7 @@ services:
     publishDir: "./"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: 3.11.9
       - key: DJANGO_SETTINGS_MODULE
         value: tovar_taxi.settings
       - key: SECRET_KEY
