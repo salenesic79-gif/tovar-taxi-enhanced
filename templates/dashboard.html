@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dobrodošli, {{ user.username }}!</h2>
+{% if user_type == 'customer' %}
+    <h3>Vaše vožnje</h3>
+    <ul class="list-group">
+        {% for ride in rides %}
+            <li class="list-group-item">{{ ride.pickup }} -> {{ ride.dropoff }} ({{ ride.get_status_display }}) - Ušteda: {{ savings|floatformat:2 }} RSD</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'request_ride' %}" class="btn btn-success mt-3">Zatraži vožnju</a>
+{% else %}
+    <h3>Dostupne vožnje (Ekstra zarada: {{ earnings|floatformat:2 }} RSD)</h3>
+    <ul class="list-group">
+        {% for ride in available_rides %}
+            <li class="list-group-item d-flex justify-content-between">
+                {{ ride.pickup }} -> {{ ride.dropoff }}
+                <a href="{% url 'accept_ride' ride.id %}" class="btn btn-sm btn-primary">Prihvati (Dopuni turu)</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Nema dostupnih vožnji.</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

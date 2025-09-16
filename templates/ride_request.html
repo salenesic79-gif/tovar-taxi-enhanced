@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Zatraži Vožnju</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Pošalji Zahtev</button>
+</form>
+<p class="mt-3">Napomena: Premium korisnici dobijaju prioritet i uštedu do 30%.</p>
+{% endblock %}
