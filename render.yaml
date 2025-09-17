@@ -2,12 +2,11 @@ services:
   - type: web
     name: tovar-taxi-enhanced
     env: python
+    runtime: python-3.11.9
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
     startCommand: "gunicorn tovar_taxi.wsgi:application"
     publishDir: "./"
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
       - key: DJANGO_SETTINGS_MODULE
         value: tovar_taxi.settings
       - key: SECRET_KEY
